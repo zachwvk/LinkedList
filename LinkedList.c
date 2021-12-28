@@ -6,7 +6,7 @@
 /* determine the length of the linked list
    Complexity O(n)
  */
-int ll_length(void ** const head, const size_t o)
+int ll_length(LL_TYPE head, const size_t o)
 {
     void * x;
     int len = 0;
@@ -19,7 +19,7 @@ int ll_length(void ** const head, const size_t o)
 /* push item to the beginning of the linked list
    Complexity O(1)
  */
-void ll_push(void ** const head, const size_t o, void * const item)
+void ll_push(LL_TYPE head, const size_t o, void * const item)
 {
     NEXT(item) = *head;
     *head = item;
@@ -29,7 +29,7 @@ void ll_push(void ** const head, const size_t o, void * const item)
    returns the popped item
    Complexity O(1)
  */
-void * ll_pop(void ** const head, const size_t o)
+void * ll_pop(LL_TYPE head, const size_t o)
 {
     void * x;
     x = *head;
@@ -43,7 +43,7 @@ void * ll_pop(void ** const head, const size_t o)
 /* append item to the end of the linked list
    Complexity O(n)
  */
-void ll_append(void ** const head, const size_t o, void * const item)
+void ll_append(LL_TYPE head, const size_t o, void * const item)
 {
     void * x;
     if(*head == NULL) *head = item;
@@ -59,7 +59,7 @@ void ll_append(void ** const head, const size_t o, void * const item)
    returns the deducted item
    Complexity O(n)
  */
-void * ll_deduct(void ** const head, const size_t o)
+void * ll_deduct(LL_TYPE head, const size_t o)
 {
     void * x, * prev;
     if(*head == NULL) return NULL; /* empty list */
@@ -77,7 +77,7 @@ void * ll_deduct(void ** const head, const size_t o)
    returns the removed item
    Complexity O(n)
  */
-void * ll_remove(void ** const head, const size_t o, void * const item)
+void * ll_remove(LL_TYPE head, const size_t o, void * const item)
 {
     void * x;
     if(item == NULL || *head == NULL) return NULL;
@@ -112,7 +112,7 @@ void * ll_remove(void ** const head, const size_t o, void * const item)
    Complexity O(n)
    returns pointer to last visited element of merged result
  */
-static void * _ll_merge(void ** const head, const size_t o, void * const list, int (*compare)(void *, void *))
+static void * _ll_merge(LL_TYPE head, const size_t o, void * const list, int (*compare)(void *, void *))
 {
     void * x, * y, * prev = NULL;
     
@@ -153,7 +153,7 @@ static void * _ll_merge(void ** const head, const size_t o, void * const list, i
     }
 }
 
-void ll_merge(void ** const head, const size_t o, void * const list, int (*compare)(void *, void *))
+void ll_merge(LL_TYPE head, const size_t o, void * const list, int (*compare)(void *, void *))
 {
     _ll_merge(head, o, list, compare);
 }
@@ -164,7 +164,7 @@ void ll_merge(void ** const head, const size_t o, void * const list, int (*compa
      < 0 if the first argument should be placed after the second
    Complexity O(n log(n))
  */
-void ll_sort(void ** const head, const size_t o, int (*compare)(void *, void *))
+void ll_sort(LL_TYPE head, const size_t o, int (*compare)(void *, void *))
 {
     /* each merge requires sub lists which are disconnected from the 
        main list, merged, then re-attached to the main list
@@ -239,7 +239,7 @@ void ll_sort(void ** const head, const size_t o, int (*compare)(void *, void *))
    Complexity O(n)
    returns pointer to NEXT pointer at end of merged result
  */
-void ** _ll_merge2(void ** const head, const size_t o, void * const list, int (*compare)(void *, void *), const int n)
+void ** _ll_merge2(LL_TYPE head, const size_t o, void * const list, int (*compare)(void *, void *), const int n)
 {
     void * x, * y, ** prev = NULL;
     int xi, yi;
@@ -309,7 +309,7 @@ void ** _ll_merge2(void ** const head, const size_t o, void * const list, int (*
      < 0 if the first argument should be placed after the second
    Complexity O(n log(n))
  */
-void ll_sort2(void ** const head, const size_t o, int (*compare)(void *, void *))
+void ll_sort2(LL_TYPE head, const size_t o, int (*compare)(void *, void *))
 {
     /* merge2 requires the start pointer of both lists to merge
        as such the list being sorted must be iterated through
@@ -355,7 +355,7 @@ void ll_sort2(void ** const head, const size_t o, int (*compare)(void *, void *)
 /* executes function fn on each item in the linked list
    Complexity O(n)
  */
-void ll_each(void ** const head, const size_t o, void (*fn)(void **, void *), void * param)
+void ll_each(LL_TYPE head, const size_t o, void (*fn)(void **, void *), void * param)
 {
     void * x;
     for(x=*head; x; x = NEXT(x)) fn(x, param);

@@ -16,17 +16,19 @@
  */
 #define offsetin(s, o, t) *((t*)((char*)s + o))
 
-int ll_length(void ** const head, const size_t o);
-void ll_push(void ** const head, const size_t o, void * const item);
-void * ll_pop(void ** const head, const size_t o);
-void ll_append(void ** const head, const size_t o, void * const item);
-void * ll_deduct(void ** const head, const size_t o);
-void * ll_remove(void ** const head, const size_t o, void * const item);
-void ll_merge(void ** const head, const size_t o, void * const list, int (*compare)(void *, void *));
-void ll_sort(void ** const head, const size_t o, int (*compare)(void *, void *));
-void ll_each(void ** const head, const size_t o, void (*fn)(void **, void *), void * param);
-void ** _ll_merge2(void ** const head, const size_t o, void * const list, int (*compare)(void *, void *), const int n);
-void ll_sort2(void ** const head, const size_t o, int (*compare)(void *, void *));
+#define LL_TYPE void ** const
+
+int ll_length(LL_TYPE head, const size_t o);
+void ll_push(LL_TYPE head, const size_t o, void * const item);
+void * ll_pop(LL_TYPE head, const size_t o);
+void ll_append(LL_TYPE head, const size_t o, void * const item);
+void * ll_deduct(LL_TYPE head, const size_t o);
+void * ll_remove(LL_TYPE head, const size_t o, void * const item);
+void ll_merge(LL_TYPE head, const size_t o, void * const list, int (*compare)(void *, void *));
+void ll_sort(LL_TYPE head, const size_t o, int (*compare)(void *, void *));
+void ll_each(LL_TYPE head, const size_t o, void (*fn)(void **, void *), void * param);
+void ** _ll_merge2(LL_TYPE head, const size_t o, void * const list, int (*compare)(void *, void *), const int n);
+void ll_sort2(LL_TYPE head, const size_t o, int (*compare)(void *, void *));
 
 #endif // !__LINKED_LIST_H__
 
@@ -44,7 +46,7 @@ void ll_sort2(void ** const head, const size_t o, int (*compare)(void *, void *)
  */
 static inline int FUNCTION(length)(STRUCT ** const head)
 {
-    return ll_length(head, OFFSET);
+    return ll_length((LL_TYPE)head, OFFSET);
 }
 
 /* push item to the beginning of the linked list
@@ -52,7 +54,7 @@ static inline int FUNCTION(length)(STRUCT ** const head)
  */
 static inline void FUNCTION(push)(STRUCT ** const head, STRUCT * const item)
 {
-    ll_push(head, OFFSET, item);
+    ll_push((LL_TYPE)head, OFFSET, item);
 }
 
 /* pop item from the beginning of the linked list
@@ -61,7 +63,7 @@ static inline void FUNCTION(push)(STRUCT ** const head, STRUCT * const item)
  */
 static inline STRUCT * FUNCTION(pop)(STRUCT ** const head)
 {
-    return ll_pop(head, OFFSET);
+    return ll_pop((LL_TYPE)head, OFFSET);
 }
 
 /* append item to the end of the linked list
@@ -69,7 +71,7 @@ static inline STRUCT * FUNCTION(pop)(STRUCT ** const head)
  */
 static inline void FUNCTION(append)(STRUCT ** const head, STRUCT * const item)
 {
-    ll_append(head, OFFSET, item);
+    ll_append((LL_TYPE)head, OFFSET, item);
 }
 
 /* deduct item from the end of the linked list
@@ -78,7 +80,7 @@ static inline void FUNCTION(append)(STRUCT ** const head, STRUCT * const item)
  */
 static inline STRUCT * FUNCTION(deduct)(STRUCT ** const head)
 {
-    return ll_deduct(head, OFFSET);
+    return ll_deduct((LL_TYPE)head, OFFSET);
 }
 
 /* remove item from the linked list
@@ -87,7 +89,7 @@ static inline STRUCT * FUNCTION(deduct)(STRUCT ** const head)
  */
 static inline STRUCT * FUNCTION(remove)(STRUCT ** const head, STRUCT * const item)
 {
-    return ll_remove(head, OFFSET, item);
+    return ll_remove((LL_TYPE)head, OFFSET, item);
 }
 
 /* merge linked list "list" into head
@@ -98,7 +100,7 @@ static inline STRUCT * FUNCTION(remove)(STRUCT ** const head, STRUCT * const ite
  */
 static inline void FUNCTION(merge)(STRUCT ** const head, STRUCT * const list, int (*compare)(STRUCT *, STRUCT *))
 {
-    ll_merge(head, OFFSET, list, compare);
+    ll_merge((LL_TYPE)head, OFFSET, list, compare);
 }
 
 /* sort linked list
@@ -109,7 +111,7 @@ static inline void FUNCTION(merge)(STRUCT ** const head, STRUCT * const list, in
  */
 void FUNCTION(sort)(STRUCT ** const head, int (*compare)(STRUCT *, STRUCT *))
 {
-    ll_sort(head, OFFSET, compare);
+    ll_sort((LL_TYPE)head, OFFSET, compare);
 }
 
 /* merge up to n nodes from "*head" with up to n nodes from "list"
@@ -122,7 +124,7 @@ void FUNCTION(sort)(STRUCT ** const head, int (*compare)(STRUCT *, STRUCT *))
  */
 static inline STRUCT ** FUNCTION(merge2)(STRUCT ** const head, STRUCT * const list, int (*compare)(STRUCT *, STRUCT *), const int n)
 {
-    return (STRUCT **)_ll_merge2(head, OFFSET, list, compare, n);
+    return (STRUCT **)_ll_merge2((LL_TYPE)head, OFFSET, list, compare, n);
 }
 
 /* sort linked list
@@ -133,14 +135,14 @@ static inline STRUCT ** FUNCTION(merge2)(STRUCT ** const head, STRUCT * const li
  */
 void FUNCTION(sort2)(STRUCT ** const head, int (*compare)(STRUCT *, STRUCT *))
 {
-    ll_sort2(head, OFFSET, compare);
+    ll_sort2((LL_TYPE)head, OFFSET, compare);
 }
 
 static inline void FUNCTION(each)(STRUCT ** const head, void (*fn)(STRUCT *, void *), void * const param)
 {
     /* The below cast is technically undefined behavior...
      * let me know if you find a system it fails in */
-    ll_each(head, OFFSET, (void (*)(void *, void *))fn, param);
+    ll_each((LL_TYPE)head, OFFSET, (void (*)(void *, void *))fn, param);
 }
 
 /* un-define all the template magic */
