@@ -15,8 +15,8 @@ typedef struct test_struct
 } test1_t;
 
 #define TEMPLATE_PREFIX test1
-#define TEMPLATE_LINKED_LIST_STRUCT test1_t
-#define TEMPLATE_LINKED_LIST_NEXT next
+#define TEMPLATE_STRUCT test1_t
+#define TEMPLATE_NEXT next
 #include "LinkedList.h"
 
 typedef struct test2_struct
@@ -26,8 +26,8 @@ typedef struct test2_struct
 } test2_t;
 
 #define TEMPLATE_PREFIX test2
-#define TEMPLATE_LINKED_LIST_STRUCT test2_t
-#define TEMPLATE_LINKED_LIST_NEXT next
+#define TEMPLATE_STRUCT test2_t
+#define TEMPLATE_NEXT next
 #include "LinkedList.h"
 
 void test1_print(test1_t * t, void * param)

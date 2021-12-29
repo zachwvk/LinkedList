@@ -355,7 +355,7 @@ void ll_sort2(LL_TYPE head, const size_t o, int (*compare)(void *, void *))
 /* executes function fn on each item in the linked list
    Complexity O(n)
  */
-void ll_each(LL_TYPE head, const size_t o, void (*fn)(void **, void *), void * param)
+void ll_each(LL_TYPE head, const size_t o, void (*fn)(void *, void *), void * param)
 {
     void * x;
     for(x=*head; x; x = NEXT(x)) fn(x, param);

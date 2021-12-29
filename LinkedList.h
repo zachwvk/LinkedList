@@ -27,17 +27,17 @@ void * ll_deduct(LL_TYPE head, const size_t o);
 void * ll_remove(LL_TYPE head, const size_t o, void * const item);
 void ll_merge(LL_TYPE head, const size_t o, void * const list, LL_COMPARE);
 void ll_sort(LL_TYPE head, const size_t o, LL_COMPARE);
-void ll_each(LL_TYPE head, const size_t o, void (*fn)(void **, void *), void * param);
+void ll_each(LL_TYPE head, const size_t o, void (*fn)(void *, void *), void * param);
 void ** _ll_merge2(LL_TYPE head, const size_t o, void * const list, LL_COMPARE, const int n);
 void ll_sort2(LL_TYPE head, const size_t o, LL_COMPARE);
 
 #endif // !__LINKED_LIST_H__
 
-#if defined(TEMPLATE_PREFIX) && defined(TEMPLATE_LINKED_LIST_STRUCT) && defined(TEMPLATE_LINKED_LIST_NEXT)
+#if defined(TEMPLATE_PREFIX) && defined(TEMPLATE_STRUCT) && defined(TEMPLATE_STRUCT)
 
 /*shorter versions of the template definitions*/
 #define PREFIX PPCAT(TEMPLATE_PREFIX, _)
-#define STRUCT TEMPLATE_LINKED_LIST_STRUCT
+#define STRUCT TEMPLATE_STRUCT
 #define OFFSET offsetof(STRUCT, next)
 
 #define FUNCTION(name) PPCAT(PREFIX, name)
@@ -152,8 +152,8 @@ static inline void FUNCTION(each)(STRUCT ** const head, void (*fn)(STRUCT *, voi
 #undef OFFSET
 
 #undef TEMPLATE_PREFIX 
-#undef TEMPLATE_LINKED_LIST_STRUCT
-#undef TEMPLATE_LINKED_LIST_NEXT
+#undef TEMPLATE_STRUCT
+#undef TEMPLATE_STRUCT
 
 #undef FUNCTION
 
