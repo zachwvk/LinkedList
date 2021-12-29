@@ -25,6 +25,7 @@ void * ll_pop(LL_TYPE head, const size_t o);
 void ll_append(LL_TYPE head, const size_t o, void * const item);
 void * ll_deduct(LL_TYPE head, const size_t o);
 void * ll_remove(LL_TYPE head, const size_t o, void * const item);
+void * ll_find(LL_TYPE head, const size_t o, void * const item, LL_COMPARE);
 void ll_merge(LL_TYPE head, const size_t o, void * const list, LL_COMPARE);
 void ll_sort(LL_TYPE head, const size_t o, LL_COMPARE);
 void ll_each(LL_TYPE head, const size_t o, void (*fn)(void *, void *), void * param);
@@ -91,6 +92,17 @@ static inline STRUCT * FUNCTION(deduct)(STRUCT ** const head)
 static inline STRUCT * FUNCTION(remove)(STRUCT ** const head, STRUCT * const item)
 {
     return ll_remove((LL_TYPE)head, OFFSET, item);
+}
+
+/* find a match to item in the linked list
+   compare must return:
+     == 0 if this is the desired item in the list
+   item will be passed to compare as the second argument
+   Complexity O(n)
+ */
+static inline void FUNCTION(find)(STRUCT ** const head, STRUCT * const item, int (*compare)(STRUCT *, STRUCT *))
+{
+    ll_find((LL_TYPE)head, OFFSET, item, (LL_COMPARE)compare);
 }
 
 /* merge linked list "list" into head

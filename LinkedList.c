@@ -90,7 +90,7 @@ void * ll_remove(LL_TYPE head, const size_t o, void * const item)
         return item;
     }
 
-    /* iterate till item is found or end or list */
+    /* iterate till item is found or end of list */
     for(x=*head; NEXT(x); x = NEXT(x))
     {
         if(NEXT(x) == item)
@@ -101,6 +101,24 @@ void * ll_remove(LL_TYPE head, const size_t o, void * const item)
         }
     }
     
+    /* item was not found */
+    return NULL;
+}
+
+/* searches for item in the linked list
+   returns the found item, or NULL if not fount
+   Complexity O(n)
+ */
+void * ll_find(LL_TYPE head, const size_t o, void * const item, int (*compare)(void *, void *))
+{
+    void * x;
+
+    /* iterate till item is found or end or list */
+    for(x=*head; x; x = NEXT(x))
+    {
+        if(compare(x, item) == 0) return item;
+    }
+
     /* item was not found */
     return NULL;
 }
