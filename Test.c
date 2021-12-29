@@ -77,6 +77,7 @@ void list_test(void)
     //test1_t * t = NULL;
     //void * tmp;
     int i, j, tmp, cnt;
+    (void)r2;
 
     printf("length when empty: %d\r\n", test1_length(&head1));
 

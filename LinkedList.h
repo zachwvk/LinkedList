@@ -16,7 +16,8 @@
  */
 #define offsetin(s, o, t) *((t*)((char*)s + o))
 
-#define LL_TYPE void ** const
+typedef void ** const LL_TYPE;
+typedef int (*LL_COMPARE)(void *, void *);
 
 int ll_length(LL_TYPE head, const size_t o);
 void ll_push(LL_TYPE head, const size_t o, void * const item);
@@ -24,11 +25,11 @@ void * ll_pop(LL_TYPE head, const size_t o);
 void ll_append(LL_TYPE head, const size_t o, void * const item);
 void * ll_deduct(LL_TYPE head, const size_t o);
 void * ll_remove(LL_TYPE head, const size_t o, void * const item);
-void ll_merge(LL_TYPE head, const size_t o, void * const list, int (*compare)(void *, void *));
-void ll_sort(LL_TYPE head, const size_t o, int (*compare)(void *, void *));
+void ll_merge(LL_TYPE head, const size_t o, void * const list, LL_COMPARE);
+void ll_sort(LL_TYPE head, const size_t o, LL_COMPARE);
 void ll_each(LL_TYPE head, const size_t o, void (*fn)(void **, void *), void * param);
-void ** _ll_merge2(LL_TYPE head, const size_t o, void * const list, int (*compare)(void *, void *), const int n);
-void ll_sort2(LL_TYPE head, const size_t o, int (*compare)(void *, void *));
+void ** _ll_merge2(LL_TYPE head, const size_t o, void * const list, LL_COMPARE, const int n);
+void ll_sort2(LL_TYPE head, const size_t o, LL_COMPARE);
 
 #endif // !__LINKED_LIST_H__
 
@@ -100,7 +101,7 @@ static inline STRUCT * FUNCTION(remove)(STRUCT ** const head, STRUCT * const ite
  */
 static inline void FUNCTION(merge)(STRUCT ** const head, STRUCT * const list, int (*compare)(STRUCT *, STRUCT *))
 {
-    ll_merge((LL_TYPE)head, OFFSET, list, compare);
+    ll_merge((LL_TYPE)head, OFFSET, list, (LL_COMPARE)compare);
 }
 
 /* sort linked list
@@ -111,7 +112,7 @@ static inline void FUNCTION(merge)(STRUCT ** const head, STRUCT * const list, in
  */
 void FUNCTION(sort)(STRUCT ** const head, int (*compare)(STRUCT *, STRUCT *))
 {
-    ll_sort((LL_TYPE)head, OFFSET, compare);
+    ll_sort((LL_TYPE)head, OFFSET, (LL_COMPARE)compare);
 }
 
 /* merge up to n nodes from "*head" with up to n nodes from "list"
@@ -124,7 +125,7 @@ void FUNCTION(sort)(STRUCT ** const head, int (*compare)(STRUCT *, STRUCT *))
  */
 static inline STRUCT ** FUNCTION(merge2)(STRUCT ** const head, STRUCT * const list, int (*compare)(STRUCT *, STRUCT *), const int n)
 {
-    return (STRUCT **)_ll_merge2((LL_TYPE)head, OFFSET, list, compare, n);
+    return (STRUCT **)_ll_merge2((LL_TYPE)head, OFFSET, list, (LL_COMPARE)compare, n);
 }
 
 /* sort linked list
@@ -135,7 +136,7 @@ static inline STRUCT ** FUNCTION(merge2)(STRUCT ** const head, STRUCT * const li
  */
 void FUNCTION(sort2)(STRUCT ** const head, int (*compare)(STRUCT *, STRUCT *))
 {
-    ll_sort2((LL_TYPE)head, OFFSET, compare);
+    ll_sort2((LL_TYPE)head, OFFSET, (LL_COMPARE)compare);
 }
 
 static inline void FUNCTION(each)(STRUCT ** const head, void (*fn)(STRUCT *, void *), void * const param)
