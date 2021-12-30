@@ -122,7 +122,7 @@ static inline void FUNCTION(merge)(STRUCT ** const head, STRUCT * const list, in
      < 0 if the first argument should be placed after the second
    Complexity O(n log(n))
  */
-static void FUNCTION(sort)(STRUCT ** const head, int (*compare)(STRUCT *, STRUCT *))
+static inline void FUNCTION(sort)(STRUCT ** const head, int (*compare)(STRUCT *, STRUCT *))
 {
     ll_sort((LL_TYPE)head, OFFSET, (LL_COMPARE)compare);
 }
@@ -146,7 +146,7 @@ static inline STRUCT ** FUNCTION(merge2)(STRUCT ** const head, STRUCT * const li
      < 0 if the first argument should be placed after the second
    Complexity O(n log(n))
  */
-static void FUNCTION(sort2)(STRUCT ** const head, int (*compare)(STRUCT *, STRUCT *))
+static inline void FUNCTION(sort2)(STRUCT ** const head, int (*compare)(STRUCT *, STRUCT *))
 {
     ll_sort2((LL_TYPE)head, OFFSET, (LL_COMPARE)compare);
 }
