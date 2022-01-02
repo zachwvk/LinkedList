@@ -100,7 +100,7 @@ static inline STRUCT * FUNCTION(remove)(STRUCT ** const head, STRUCT * const ite
    item will be passed to compare as the second argument
    Complexity O(n)
  */
-static inline STRUCT * FUNCTION(find)(STRUCT ** const head, STRUCT * const item, int (*compare)(STRUCT *, STRUCT *))
+static inline STRUCT * FUNCTION(find)(STRUCT ** const head, void * const item, int (*compare)(STRUCT *, void *))
 {
     return ll_find((LL_TYPE)head, OFFSET, item, (LL_COMPARE)compare);
 }
