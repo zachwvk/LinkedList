@@ -263,7 +263,7 @@ void ** _ll_merge2(LL_TYPE head, const size_t o, void * const list, int (*compar
     int xi, yi;
 
     /* sanity check*/
-    if(compare == NULL) return *head;
+    if(compare == NULL) return head;
 
     prev = head;
     x=*head;
