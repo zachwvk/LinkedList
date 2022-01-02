@@ -65,7 +65,7 @@ static inline void FUNCTION(push)(STRUCT ** const head, STRUCT * const item)
  */
 static inline STRUCT * FUNCTION(pop)(STRUCT ** const head)
 {
-    return ll_pop((LL_TYPE)head, OFFSET);
+    return (STRUCT *)ll_pop((LL_TYPE)head, OFFSET);
 }
 
 /* append item to the end of the linked list
@@ -82,7 +82,7 @@ static inline void FUNCTION(append)(STRUCT ** const head, STRUCT * const item)
  */
 static inline STRUCT * FUNCTION(deduct)(STRUCT ** const head)
 {
-    return ll_deduct((LL_TYPE)head, OFFSET);
+    return (STRUCT *)ll_deduct((LL_TYPE)head, OFFSET);
 }
 
 /* remove item from the linked list
@@ -91,7 +91,7 @@ static inline STRUCT * FUNCTION(deduct)(STRUCT ** const head)
  */
 static inline STRUCT * FUNCTION(remove)(STRUCT ** const head, STRUCT * const item)
 {
-    return ll_remove((LL_TYPE)head, OFFSET, item);
+    return (STRUCT *)ll_remove((LL_TYPE)head, OFFSET, item);
 }
 
 /* find a match to item in the linked list
@@ -102,7 +102,7 @@ static inline STRUCT * FUNCTION(remove)(STRUCT ** const head, STRUCT * const ite
  */
 static inline STRUCT * FUNCTION(find)(STRUCT ** const head, void * const item, int (*compare)(STRUCT *, void *))
 {
-    return ll_find((LL_TYPE)head, OFFSET, item, (LL_COMPARE)compare);
+    return (STRUCT *)ll_find((LL_TYPE)head, OFFSET, item, (LL_COMPARE)compare);
 }
 
 /* merge linked list "list" into head
