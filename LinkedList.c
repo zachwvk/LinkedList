@@ -116,7 +116,7 @@ void * ll_find(LL_TYPE head, const size_t o, void * const item, int (*compare)(v
     /* iterate till item is found or end or list */
     for(x=*head; x; x = NEXT(x))
     {
-        if(compare(x, item) == 0) return item;
+        if(compare(x, item) == 0) return x;
     }
 
     /* item was not found */
