@@ -40,7 +40,7 @@ The function `message_push` has this signature:
 
     void message_push(message_t ** head, message_t * item);
 
-_Note: the functions all take a pointer to the memory you are using for tracking the `head` of the list. This is used as a convention throughout this project to allow the datastructure functions to mutate any data in the datastructure, including the first element. The value of head is intentionally not checked for NULL. It is expected that the majority of calls to this function to be of the form `ll_push(&my_head, my_data)` in which case `head` will never be NULL._
+_Note: the functions all take a pointer to the memory you are using for tracking the `head` of the list. This is used as a convention throughout this project to allow the datastructure functions to mutate any data in the datastructure, including the first element. The value of head is intentionally not checked for NULL. It is expected that the majority of calls to this function to be of the form `message_push(&my_head, my_data)` in which case `head` will never be NULL._
 
 Both `head` and `item` are pointers to the message_t type. One valid way to append to the end of the linked list is to do this:
 
