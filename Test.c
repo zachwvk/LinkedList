@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdint.h>
 
 //#define FROM_NEXT_TO_TEST_T(n) (test_t*)((char *)n - OFFSETOF(test_t, next))
 
@@ -8,10 +9,10 @@
 //#define FROM_NEXT_TO_TEST_T(n) CAST_OFFSET_TO_TYPE(test_t, next, n)
 //#define FROM_TEST_T_TO_NEXT(n) CAST_TYPE_TO_OFFSET(test_t, next, n)
 
-typedef struct test_struct
+typedef struct test1_struct
 {
     char data;
-    struct test_struct * next;
+    struct test1_struct * next;
 } test1_t;
 
 #define TEMPLATE_PREFIX test1
@@ -68,12 +69,15 @@ int test2_compare_reversed(test2_t * x, test2_t * y)
     return x->data - y->data;
 }
 
+//void received_message(int id, size_t len, uint8_t * data);
+
 void list_test(void)
 {
     test1_t buf1[26];
     test1_t * head1 = NULL, * t1, ** r1;
     test2_t buf2[26];
     test2_t * head2 = NULL, * t2, ** r2;
+    LL_ITERATOR it;
     //test1_t * t = NULL;
     //void * tmp;
     int i, j, tmp, cnt;
@@ -94,6 +98,15 @@ void list_test(void)
 
     test1_each(&head1, test1_print, NULL);
     test2_each(&head2, test2_print, NULL);
+
+    //for (it = test1_iter(&head1); t1 = test1_iter_val(&it); test1_iter_next(&it))
+    for_each(test1, &head1, t1, it)
+    {
+        if (t1 != NULL)
+            printf("%c%s", t1->data, t1->next ? "->" : "\r\n");
+        else
+            printf("%c%s", ' ', "\r\n");
+    }
 
     for(i=0; i < 26; i++)
     {
@@ -193,4 +206,6 @@ void list_test(void)
 
     test1_sort2(&head1, test1_compare);
     test1_each(&head1, test1_print, NULL);
+
+    //received_message(0, 100, (uint8_t*)"The quick Brown Fox Jumped over the Lazy Dog");
 }

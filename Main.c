@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 void list_test(void);
+void run_demo(void);
 
 int main(int argc, char **argv)
 {
@@ -8,7 +9,8 @@ int main(int argc, char **argv)
 	
 	printf("Hello World\r\n");
 
-	list_test();
+	run_demo();
+	//list_test();
 
 	printf("Press any Key\r\n");
 	c = getchar();

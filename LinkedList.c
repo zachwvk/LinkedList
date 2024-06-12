@@ -109,7 +109,7 @@ void * ll_remove(LL_TYPE head, const size_t o, void * const item)
    returns the found item, or NULL if not fount
    Complexity O(n)
  */
-void * ll_find(LL_TYPE head, const size_t o, void * const item, int (*compare)(void *, void *))
+void * ll_find(const LL_TYPE head, const size_t o, void * const item, int (*compare)(void *, void *))
 {
     void * x;
 
@@ -373,8 +373,33 @@ void ll_sort2(LL_TYPE head, const size_t o, int (*compare)(void *, void *))
 /* executes function fn on each item in the linked list
    Complexity O(n)
  */
-void ll_each(LL_TYPE head, const size_t o, void (*fn)(void *, void *), void * param)
+void ll_each(const LL_TYPE head, const size_t o, void (*fn)(void *, void *), void * param)
 {
-    void * x;
+    void* x;
     for(x=*head; x; x = NEXT(x)) fn(x, param);
+}
+
+/* returns an iterator for this linked list
+   Complexity O(1)
+ */
+LL_ITERATOR ll_iter(const LL_TYPE head)
+{
+    return (LL_ITERATOR){ *head };
+}
+
+/* returns the value for the iterator, or NULL if there is no value 
+   Complexity O(1)
+ */
+void * ll_iter_val(LL_ITERATOR * const it)
+{
+    return it->n;
+}
+
+/* advances the iterator, or sets it to NULL if this is the end of the list
+   Complexity O(1)
+ */
+void ll_iter_next(LL_ITERATOR * it, const size_t o)
+{
+    void* x = NEXT(it->n);
+    it->n = x;
 }
