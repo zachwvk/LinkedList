@@ -66,4 +66,4 @@ Both `head` and `item` are pointers to the `message_t` type. One valid way to ap
 
 This uses `last_m` to save a reference to the NULL pointer at the end of the Linked List. This allows appending to the Linked List without iterating over the entire list each time a message is received.
 
-
+See [this article](https://zachwvk.github.io/articles?LinkedList) for a longer read on the motivation and inner workings of this project.
